@@ -3,8 +3,8 @@ from .models import Team
 from cars.models import Car
 
 # Create your views here.
+teams=Team.objects.all()
 def home(request):
-    teams=Team.objects.all()
     featured_cars=Car.objects.order_by('-created_date').filter(is_featured=True)
     all_cars=Car.objects.order_by('-created_date')
     data={"teams":teams,
@@ -16,7 +16,8 @@ def home(request):
 
 
 def about(request):
-    return render(request,"pages/about.html")
+    data={"teams":teams,}
+    return render(request,"pages/about.html",data)
 
 
 def services(request):

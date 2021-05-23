@@ -1,0 +1,10 @@
+#header {
+    background-color: white !important;
+    color: black;
+    box-shadow: 0px 0px 5px 0px blue;
+}
+
+#header a:link,
+#header a:visited {
+    color: #000000;
+}

@@ -134,7 +134,7 @@
                 <div class="slick-slide-item">
                     <div class="car-box-3">
                         <div class="car-thumbnail">
-                            <a href="car-details.html" class="car-img">
+                            <a href="{% url 'car_detail' featured_car.id %}" class="car-img">
                                 <div class="tag-2">Featured</div>
                                 <div class="price-box">
                                     
@@ -148,7 +148,7 @@
                                     <div class="overlap-btns-area">
                                         <div class="car-magnify-gallery">
                                             {% if featured_car.car_photo.url %}
-                                            <a href="{{featured_car.car_photo.url}}" class="overlap-btn">
+                                            <a href="{% url 'car_detail' featured_car.id %}" class="overlap-btn">
                                                 <i class="fa fa-expand"></i>
                                                 <img class="hidden" src="{{featured_car.car_photo.url}}">
                                             </a>{% endif %}
@@ -180,10 +180,10 @@
                         </div>
                         <div class="detail">
                             <h1 class="title">
-                                <a href="car-details.html">{{featured_car.car_title}} {{featured_car.model}}</a>
+                                <a href="{% url 'car_detail' featured_car.id %}">{{featured_car.car_title}} {{featured_car.model}}</a>
                             </h1>
                             <div class="location">
-                                <a href="car-details.html">
+                                <a href="{% url 'car_detail' featured_car.id %}">
                                     <i class="flaticon-pin"></i>{{featured_car.city}},{{featured_car.state}}
                                 </a>
                             </div>
@@ -227,7 +227,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="car-box">
                     <div class="car-thumbnail">
-                        <a href="car-details.html" class="car-img">
+                        <a href="{% url 'car_detail' car.id %}" class="car-img">
                             <div class="tag">For Sale</div>
                             <img class="d-block w-100" src="{{car.car_photo.url}}" alt="car" style="height:260px">
                             <div class="facilities-list clearfix">
@@ -269,10 +269,10 @@
                     </div>
                     <div class="detail">
                         <h1 class="title">
-                            <a href="car-details.html">{{car.car_title}} {{car.model}}</a>
+                            <a href="{% url 'car_detail' car.id %}">{{car.car_title}} {{car.model}}</a>
                         </h1>
                         <div class="location">
-                            <a href="car-details.html">
+                            <a href="{% url 'car_detail' car.id %}">
                                 <i class="flaticon-pin"></i>{{car.city}}, {{car.state}}
                             </a>
                         </div>

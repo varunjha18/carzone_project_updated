@@ -147,4 +147,6 @@ MESSAGE_TAGS = {
 }
 
 
+LOGIN_REDIRECT_URL = 'dashboard'
+
 SITE_ID=1

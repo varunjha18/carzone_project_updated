@@ -16,11 +16,12 @@
 <!-- Car details page start -->
 <div class="car-details-page content-area-6">
     <div class="container">
+                    {% include 'includes/messages.html' %}
         <div class="row">
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div class="car-details-section">
                     <!-- Heading start -->
-                    <div class="heading-car clearfix">
+                        <div class="heading-car clearfix">
                         <div class="pull-left">
                             <h3>{{single_car.car_title}} {{single_car.model}}</h3>
                             <h6>

@@ -151,3 +151,11 @@ MESSAGE_TAGS = {
 LOGIN_REDIRECT_URL = 'dashboard'
 
 SITE_ID=1
+
+# Email configurations
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'varunjha1245@gmail.com'
+EMAIL_HOST_PASSWORD = 'Varun@2000'
+EMAIL_USE_TLS =True

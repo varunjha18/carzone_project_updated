@@ -35,27 +35,17 @@
 		</tr>
 	  </thead>
 	  <tbody>
-		<tr>
-		  <th scope="row">1</th>
-		  <td>Lamborgini Huracan</td>
-		  <td>Austin</td>
+		{% for enquiry in inquiries %}
+        <tr>
+        
+		  <th scope="row">{{enquiry.id}}</th>
+		  <td>{{enquiry.car_title}}</td>
+		  <td>{{enquiry.city}}</td>
 		  <td>$25000</td>
-		  <td><a href="#" class="btn btn-outline-dark">View Car</a></td>
+		  <td><a href="/cars/{{enquiry.car_id}}" class="btn btn-outline-dark">View Car</a></td>
 		</tr>
-		<tr>
-		  <th scope="row">2</th>
-		  <td>Lamborgini Huracan</td>
-		  <td>Austin</td>
-		  <td>$25000</td>
-		  <td><a href="#" class="btn btn-outline-dark">View Car</a></td>
-		</tr>
-		<tr>
-		  <th scope="row">3</th>
-		  <td>Lamborgini Huracan</td>
-		  <td>Austin</td>
-		  <td>$25000</td>
-		  <td><a href="#" class="btn btn-outline-dark">View Car</a></td>
-		</tr>
+        {% endfor %}
+		
 	  </tbody>
 	</table>
 </div>

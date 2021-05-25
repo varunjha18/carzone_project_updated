@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages,auth
 from django.contrib.auth.models import User
+from contacts.models import Contact
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -70,6 +72,9 @@ def register(request):
     else:
         return render(request,'accounts/register.html')
 
-
+@login_required(login_url='login')
 def dashboard(request):
-    return render(request,'accounts/dashboard.html')
+    user_id=request.user.id
+    inquiries=Contact.objects.all().filter(user_id=user_id).order_by('-created_date')
+    data={'inquiries':inquiries,}
+    return render(request,'accounts/dashboard.html',data)

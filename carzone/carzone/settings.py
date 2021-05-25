@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "pages.apps.PagesConfig",
+    "contacts.apps.ContactsConfig",
     "cars.apps.CarsConfig",
     "accounts.apps.AccountsConfig",
     'django.contrib.admin',

@@ -1,8 +1,4 @@
-{% extends 'pages/base.html' %}
-
-{% load humanize %}
-
-{% block content %}
+{% extends 'pages/base.html' %} {% load static %} {% load humanize %} {% block content %}
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container breadcrumb-area">
@@ -85,7 +81,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <!-- Tabbing box start -->
                     <div class="tabbing tabbing-box mb-40">
                         <ul class="nav nav-tabs" id="carTab" role="tablist">
@@ -111,24 +107,24 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                             <ul>
-                                            {% for feature in single_car.features %}
+                                                {% for feature in single_car.features %}
                                                 <li>
                                                     {{feature}}
                                                 </li>
-                                            {% endfor %}
-                                                
-                                               
+                                                {% endfor %}
+
+
                                             </ul>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
-                        
-                    
+
+
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
@@ -142,37 +138,37 @@
                         <h3 class="sidebar-title">Refine Your Search</h3>
                         <ul>
                             <li>
-                                <span>Body Style:</span>Convertible
+                                <span>Body Style:</span>{{single_car.body_style}}
                             </li>
                             <li>
-                                <span>Engine:</span>3.4L Mid-Engine V6
+                                <span>Engine:</span>{{single_car.engine}}
                             </li>
                             <li>
-                                <span>Transmission:</span>6-speed Manual
+                                <span>Transmission:</span>{{single_car.transmission}}
                             </li>
                             <li>
                                 <span>Drivetrain:</span>Rear Wheel Drive
                             </li>
                             <li>
-                                <span>Exaterion:</span>Lime Gold Metallic
+                                <span>Exaterion:</span>{{single_car.color}}
                             </li>
                             <li>
-                                <span>Interior:</span>Agate Grey
+                                <span>Interior:</span>{{single_car.interiors}}
                             </li>
                             <li>
-                                <span>Miles:</span>12
+                                <span>Miles:</span>{{single_car.miles | intcomma}} miles
                             </li>
                             <li>
-                                <span>Doors:</span>2
+                                <span>Doors:</span>{{single_car.doors}}
                             </li>
                             <li>
-                                <span>Passengers:</span>2
+                                <span>Passengers:</span>{{single_car.passengers}}
                             </li>
                             <li>
                                 <span>Vin #:</span>WP0AB2E81EK190171
                             </li>
                             <li>
-                                <span>Fuel Mileage:</span>20 City / 28 Hwy
+                                <span>Fuel Mileage:</span>{{single_car.milage}}
                             </li>
                             <li>
                                 <span>Fuel Type:</span>Gasoline
@@ -195,76 +191,86 @@
 
                     <!-- Inquiry Modal -->
                     <div class="modal fade" id="inquiryModal" role="dialog">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="contact-dealer modal-header">
-                            <!-- <h5 class="modal-title" id="inquiryModalLabel">Contact Dealer</h5> -->
-                            <img src="img/logos/logo-black-white.png">
-                            <button type="button" class="close" data-dismiss="modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="contact-dealer modal-header">
+                                    <!-- <h5 class="modal-title" id="inquiryModalLabel">Contact Dealer</h5> -->
+                                    <img src="{% static 'img/logos/logo-black-white.png' %}">
+                                    <button type="button" class="close" data-dismiss="modal">
                               <span>&times;</span>
                             </button>
-                          </div>
-                          <div class="modal-body">
-                            <form action="#">
-                                <div class="form-group">
-                                  <label for="name" class="col-form-label">Hello, My Name is</label>
-                                  <div class="row">
-                                    <div class="col">
-                                      <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
-                                    </div>
-                                    <div class="col">
-                                      <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
-                                    </div>
-                                  </div>
                                 </div>
-                                  <div class="form-group">
-                                      <select class="form-control" id="sel1" name="customer_need">
-                                        <option value="I'm interested in this">I'm interested in this</option>
+                                <div class="modal-body">
+                                    <form action="{% url 'inquiry' %}" method="POST">
+                                        {% csrf_token %} {% if user.is_authenticated %}
+
+                                        <input type="hidden" name="user_id" value="{{user.id}}"> {% else %}
+                                        <input type="hidden" name="user_id" value="0 "> {% endif %}
+
+
+                                        <input type="hidden" name="car_id" value="{{single_car.id}}">
+
+
+
+                                        <div class="form-group">
+                                            <label for="name" class="col-form-label ">Hello, My Name is</label>
+                                            <div class="row">
+                                                <div class="col ">
+                                                    <input type="text " name="first_name" class="form-control" placeholder="First Name " required {% if user.is_authenticated %} value="{{user.first_name}}" {% endif %}>
+                                                </div>
+                                                <div class="col ">
+                                                    <input type="text " name="last_name" class="form-control" placeholder="Last Name " required {% if user.is_authenticated %} value="{{user.last_name}}" {% endif %}>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <select class="form-control " id="sel1 " name="customer_need">
+                                        <option value="I 'm interested in this">I'm interested in this</option>
                                         <option value="I'd like to know your best price for this">I'd like to know your best price for this</option>
                                         <option value="I'd like to test drive this">I'd like to test drive this</option>
                                         <option value="I'd like a history report for this">I'd like a history report for this</option>
-                                      </select>
-                                    </div>
-                                
-                                <div class="form-group">
-                                  <input type="text" name="car_title" class="form-control" value="LAMBORGHINI HURACÁN." readonly>
-                                </div>
-                               
-                                <div class="form-group">
-                                  <label for="name" class="col-form-label">I live in</label>
-                                  <div class="row">
-                                    <div class="col">
-                                      <input type="text" name="city" class="form-control" placeholder="City" required>
-                                    </div>
-                                    <div class="col">
-                                      <input type="text" name="state" class="form-control" placeholder="State" required>
-                                    </div>
-                                  </div>
-                                </div>
+                                        </select>
+                                        </div>
 
-                                <div class="form-group">
-                                  <div class="row">
-                                    <div class="col">
-                                        <label for="name" class="col-form-label">You can reach me by email at</label>
-                                      <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                                    </div>
-                                    <div class="col">
-                                        <label for="phone" class="col-form-label">or by phone at</label>
-                                      <input type="text" name="phone" placeholder="Phone Number (optional)" class="form-control">
-                                    </div>
-                                  </div>
-                                </div>
+                                        <div class="form-group">
+                                            <input type="text" name="car_title" class="form-control" value="{{single_car.car_title}} {{single_car.model}}" readonly>
+                                        </div>
 
-                                <div class="form-group">
-                                  <label for="message" class="col-form-label">Add comments</label>
-                                  <textarea name="message" class="form-control" placeholder="Enter your message here (optional)"></textarea>
+                                        <div class="form-group">
+                                            <label for="name" class="col-form-label">I live in</label>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input type="text" name="city" class="form-control" placeholder="City" required>
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" name="state" class="form-control" placeholder="State" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="name" class="col-form-label">You can reach me by email at</label>
+                                                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="phone" class="col-form-label">or by phone at</label>
+                                                    <input type="text" name="phone" placeholder="Phone Number (optional)" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="message" class="col-form-label">Add comments</label>
+                                            <textarea name="message" class="form-control" placeholder="Enter your message here (optional)"></textarea>
+                                        </div>
+                                        <hr>
+                                        <input type="submit" value="Send" class="btn btn-block btn-danger">
+                                    </form>
                                 </div>
-                                <hr>
-                                <input type="submit" value="Send" class="btn btn-block btn-danger">
-                            </form>
-                          </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <!-- Question start -->
                     <div class="widget question">
@@ -290,7 +296,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
